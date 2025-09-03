@@ -1,0 +1,55 @@
+# Crear .gitignore para Java
+cat > .gitignore << 'EOF'
+# Archivos compilados
+*.class
+*.jar
+*.war
+*.ear
+
+# Archivos de build
+target/
+build/
+out/
+bin/
+
+# Archivos del IDE
+.idea/
+.eclipse/
+.metadata/
+.project
+.classpath
+.settings/
+*.iml
+*.iws
+*.ipr
+
+# Variables de entorno y configuración local
+.env
+application-local.properties
+application-local.yml
+
+# Logs
+*.log
+logs/
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Gradle
+.gradle/
+gradle/
+gradlew
+gradlew.bat
+EOF
