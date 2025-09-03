@@ -153,7 +153,7 @@ public class Minesweeper extends JFrame {
     System.exit(0);
 
   }
-  
+
    // Clase interna para manejar los clics en las celdas
   private class CellClickListener implements ActionListener {
 
@@ -170,5 +170,31 @@ public class Minesweeper extends JFrame {
     }
 
   }
+
+private int clickCount = 0; // Nuevo atributo
+
+// Modifica el método uncoverCell para incrementar el contador
+
+private void uncoverCell(int i, int j) {
+  clickCount++; // Incrementa en cada clic
+  System.out.println("Clic número: " + clickCount); // Muestra en consola
+
+  if (mines[i][j]) {
+    loseGame();
+  } else {
+    buttons[i][j].setText(Integer.toString(surroundingMines[i][j]));
+    buttons[i][j].setEnabled(false);
+    uncoveredCells++;
+
+    if (uncoveredCells == 90) {
+      winGame();
+    }
+
+    if (surroundingMines[i][j] == 0) {
+      uncoverSurroundingCells(i, j);
+    }
+  }
+}
+
 
 }
