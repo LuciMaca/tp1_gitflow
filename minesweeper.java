@@ -129,7 +129,7 @@ public class Minesweeper extends JFrame {
   }
     // Metodo que muestra cuando se gana el juego
   private void winGame() {
-    JOptionPane.showMessageDialog(this, "You won!");
+    JOptionPane.showMessageDialog(this, "You won with style.. QUEEP IT GOING!");
     System.exit(0);
   }
     // Metodo que muestra cuando se pierde el juego
