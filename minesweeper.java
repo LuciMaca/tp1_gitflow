@@ -12,8 +12,8 @@ public class Minesweeper extends JFrame {
 
   public Minesweeper() {
     setTitle("Minesweeper");
-    setTitle("Minesweeper");
-    setTitle("Minesweeper");
+    setTitle("Mucha Suerte");
+
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setLayout(new GridLayout(10, 10));
 
@@ -23,16 +23,17 @@ public class Minesweeper extends JFrame {
     uncoveredCells = 0;
 
     for (int i = 0; i < 10; i++) {
+
       for (int j = 0; j < 10; j++) {
         buttons[i][j] = new JButton();
         buttons[i][j].addActionListener(new CellClickListener(i, j));
         add(buttons[i][j]);
       }
+
     }
 
     placeMines();
     countSurroundingMines();
-
     pack();
     setVisible(true);
   }
@@ -40,19 +41,26 @@ public class Minesweeper extends JFrame {
   private void placeMines() {
     Random random = new Random();
     int placedMines = 0;
+
     while (placedMines < 10) {
+
       int i = random.nextInt(10);
       int j = random.nextInt(10);
+
       if (!mines[i][j]) {
         mines[i][j] = true;
         placedMines++;
       }
+
     }
   }
   // Metodo que cuenta las minas alrededor
   private void countSurroundingMines() {
+
     for (int i = 0; i < 10; i++) {
+
       for (int j = 0; j < 10; j++) {
+
         if (!mines[i][j]) {
           int count = 0;
           if (i > 0 && mines[i - 1][j]) count++;
@@ -64,24 +72,32 @@ public class Minesweeper extends JFrame {
           if (i > 0 && j < 9 && mines[i - 1][j + 1]) count++;
           if (i < 9 && j > 0 && mines[i + 1][j - 1]) count++;
           surroundingMines[i][j] = count;
-        }
+        }   else {
+          surroundingMines[i][j] = -1; // Indica que hay una mina
+        }   
+
       }
+
     }
   }
    // Metodo que descubre las celdas
   private void uncoverCell(int i, int j) {
+
     if (mines[i][j]) {
       loseGame();
     } else {
       buttons[i][j].setText(Integer.toString(surroundingMines[i][j]));
       buttons[i][j].setEnabled(false);
       uncoveredCells++;
+
       if (uncoveredCells == 90) {
         winGame();
       }
+
       if (surroundingMines[i][j] == 0) {
         uncoverSurroundingCells(i, j);
       }
+
     }
   }
     // Metodo que descubre las celdas alrededor
@@ -94,18 +110,22 @@ public class Minesweeper extends JFrame {
       i - 1,
       j - 1
     );
+
     if (i < 9 && j < 9 && buttons[i + 1][j + 1].isEnabled()) uncoverCell(
       i + 1,
       j + 1
     );
+
     if (i > 0 && j < 9 && buttons[i - 1][j + 1].isEnabled()) uncoverCell(
       i - 1,
       j + 1
     );
+
     if (i < 9 && j > 0 && buttons[i + 1][j - 1].isEnabled()) uncoverCell(
       i + 1,
       j - 1
     );
+
   }
     // Metodo que muestra cuando se gana el juego
   private void winGame() {
@@ -114,19 +134,29 @@ public class Minesweeper extends JFrame {
   }
     // Metodo que muestra cuando se pierde el juego
   private void loseGame() {
+
     for (int i = 0; i < 10; i++) {
+
       for (int j = 0; j < 10; j++) {
+
         if (mines[i][j]) {
           buttons[i][j].setText("*");
         }
+
         buttons[i][j].setEnabled(false);
+
       }
+
     }
+
     JOptionPane.showMessageDialog(this, "You lost.");
     System.exit(0);
+
   }
+  
    // Clase interna para manejar los clics en las celdas
   private class CellClickListener implements ActionListener {
+
     private int i;
     private int j;
 
@@ -138,5 +168,7 @@ public class Minesweeper extends JFrame {
     public void actionPerformed(ActionEvent e) {
       uncoverCell(i, j);
     }
+
   }
+
 }
