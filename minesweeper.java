@@ -12,6 +12,8 @@ public class Minesweeper extends JFrame {
 
   public Minesweeper() {
     setTitle("Minesweeper");
+    setTitle("Minesweeper");
+    setTitle("Minesweeper");
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setLayout(new GridLayout(10, 10));
 
@@ -34,7 +36,7 @@ public class Minesweeper extends JFrame {
     pack();
     setVisible(true);
   }
-
+ // Metodo de donde estan las minas
   private void placeMines() {
     Random random = new Random();
     int placedMines = 0;
@@ -47,6 +49,7 @@ public class Minesweeper extends JFrame {
       }
     }
   }
+  // Metodo que cuenta las minas alrededor
   private void countSurroundingMines() {
     for (int i = 0; i < 10; i++) {
       for (int j = 0; j < 10; j++) {
@@ -65,7 +68,7 @@ public class Minesweeper extends JFrame {
       }
     }
   }
-
+   // Metodo que descubre las celdas
   private void uncoverCell(int i, int j) {
     if (mines[i][j]) {
       loseGame();
@@ -81,7 +84,7 @@ public class Minesweeper extends JFrame {
       }
     }
   }
-
+    // Metodo que descubre las celdas alrededor
   private void uncoverSurroundingCells(int i, int j) {
     if (i > 0 && buttons[i - 1][j].isEnabled()) uncoverCell(i - 1, j);
     if (i < 9 && buttons[i + 1][j].isEnabled()) uncoverCell(i + 1, j);
@@ -104,12 +107,12 @@ public class Minesweeper extends JFrame {
       j - 1
     );
   }
-
+    // Metodo que muestra cuando se gana el juego
   private void winGame() {
     JOptionPane.showMessageDialog(this, "You won!");
     System.exit(0);
   }
-
+    // Metodo que muestra cuando se pierde el juego
   private void loseGame() {
     for (int i = 0; i < 10; i++) {
       for (int j = 0; j < 10; j++) {
@@ -122,7 +125,7 @@ public class Minesweeper extends JFrame {
     JOptionPane.showMessageDialog(this, "You lost.");
     System.exit(0);
   }
-
+   // Clase interna para manejar los clics en las celdas
   private class CellClickListener implements ActionListener {
     private int i;
     private int j;
