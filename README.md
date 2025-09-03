@@ -1,0 +1,4 @@
+"# Ingenieria de Software Trabajo Practico 1 - Sistemas de Gestion de la Configuracion" 
+En un archivo README se documenta la información esencial de un proyecto. 
+Generalmente incluye una descripción general que explica de qué se trata y cuál es su objetivo, los requisitos y pasos de instalación, ejemplos básicos de uso, así como una breve guía sobre la estructura de archivos. 
+Además, puede contener las condiciones de licencia y las indicaciones para colaborar en el desarrollo. En resumen, el README funciona como una guía inicial que permite comprender, instalar y utilizar el proyecto de manera sencilla.
