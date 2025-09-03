@@ -11,17 +11,19 @@ public class Minesweeper extends JFrame {
   private int uncoveredCells;
 
   public Minesweeper() {
+    // Configuracion de la ventana del juego
+    // Crea una ventana de 10x10 con botones para cada celda
     setTitle("Minesweeper");
     setTitle("Mucha Suerte");
-
+    // Configuracion de la ventana del juego
     setDefaultCloseOperation(EXIT_ON_CLOSE);
     setLayout(new GridLayout(10, 10));
-
+    // Inicializacion de los arrays y variables
     buttons = new JButton[10][10];
     mines = new boolean[10][10];
     surroundingMines = new int[10][10];
     uncoveredCells = 0;
-
+    // Creacion de los botones y agregacion a la ventana
     for (int i = 0; i < 10; i++) {
 
       for (int j = 0; j < 10; j++) {
@@ -31,13 +33,16 @@ public class Minesweeper extends JFrame {
       }
 
     }
-
+    // LLamada a los metodos para colocar minas y contar minas alrededor
     placeMines();
     countSurroundingMines();
+    // Ajuste del tamaño de la ventana y visibilidad
     pack();
     setVisible(true);
   }
  // Metodo de donde estan las minas
+ // Coloca 10 minas en posiciones aleatorias del tablero
+ // Asegura que no haya dos minas en la misma celda
   private void placeMines() {
     Random random = new Random();
     int placedMines = 0;
@@ -55,6 +60,8 @@ public class Minesweeper extends JFrame {
     }
   }
   // Metodo que cuenta las minas alrededor
+  // Si una celda no tiene mina, cuenta cuantas minas hay en las celdas vecinas
+  // Si una celda tiene mina, se marca con -1 en el array surroundingMines
   private void countSurroundingMines() {
 
     for (int i = 0; i < 10; i++) {
@@ -81,6 +88,8 @@ public class Minesweeper extends JFrame {
     }
   }
    // Metodo que descubre las celdas
+   // Si la celda tiene una mina, se pierde el juego
+   // Si no tiene mina, se muestra el numero de minas alrededor
   private void uncoverCell(int i, int j) {
 
     if (mines[i][j]) {
@@ -101,6 +110,8 @@ public class Minesweeper extends JFrame {
     }
   }
     // Metodo que descubre las celdas alrededor
+    // Si una celda descubierta no tiene minas alrededor, se descubren sus celdas vecinas
+    // Recursivamente se llama a uncoverCell para cada celda vecina
   private void uncoverSurroundingCells(int i, int j) {
     if (i > 0 && buttons[i - 1][j].isEnabled()) uncoverCell(i - 1, j);
     if (i < 9 && buttons[i + 1][j].isEnabled()) uncoverCell(i + 1, j);
@@ -133,6 +144,8 @@ public class Minesweeper extends JFrame {
     System.exit(0);
   }
     // Metodo que muestra cuando se pierde el juego
+    // Muestra todas las minas y deshabilita todos los botones
+    // Luego muestra un mensaje de que se ha perdido el juego
   private void loseGame() {
 
     for (int i = 0; i < 10; i++) {
@@ -155,6 +168,8 @@ public class Minesweeper extends JFrame {
   }
 
    // Clase interna para manejar los clics en las celdas
+   // Cada vez que se hace clic en una celda, se llama al método uncoverCell
+   // con las coordenadas de la celda clicada
   private class CellClickListener implements ActionListener {
 
     private int i;
@@ -174,9 +189,12 @@ public class Minesweeper extends JFrame {
 private int clickCount = 0; // Nuevo atributo
 
 // Modifica el método uncoverCell para incrementar el contador
+// y mostrar el número de clics en la consola
 
 private void uncoverCell(int i, int j) {
+
   clickCount++; // Incrementa en cada clic
+  
   System.out.println("Clic número: " + clickCount); // Muestra en consola
 
   if (mines[i][j]) {
